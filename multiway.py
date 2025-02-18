@@ -25,23 +25,6 @@ duplicate = newdf2[newdf2.duplicated(["readid"], keep=False)]
 ### output probe combinations for the same readid.
 probeComb = duplicate.groupby(['readid']).agg({'probeName':','.join}).reset_index()
 probeComb.to_csv(f'{outname}_probeCombination.txt', sep='\t', index=False)
-
-#count = {}
-#for index, row in probeComb.iterrows():
-#    probeSet = tuple(row['probeName'].split(","))
-#    
-#    sortedSet = tuple(sorted(probeSet))
-#    #print(sortedSet)
-#    
-#    if sortedSet not in count.keys():
-#        count[sortedSet] = 1
-#    else:
-#        count[sortedSet] += 1
-
-## filter for multiway count 
-#for i in count.copy():
-#    if len(i)<=2:
-#        del count[i]
         
 
 count={}
@@ -88,8 +71,8 @@ multiway_interaction.to_csv(f'{outname}_multiread.info.bed', sep="\t", index=Fal
 twoway_interaction = dat[dat['readid'].isin(twoway_read)]
 twoway_interaction.to_csv(f'{outname}_twoway_read.info.bed', sep="\t", index=False)
 
-#threeway_interaction = dat[dat['readid'].isin(twoway_read)]
-#threeway_interaction.to_csv(f'{outname}_threeway_read.info.bed', sep="\t", index=False)
+threeway_interaction = dat[dat['readid'].isin(twoway_read)]
+threeway_interaction.to_csv(f'{outname}_threeway_read.info.bed', sep="\t", index=False)
 
 fourway_interaction = dat[dat['readid'].isin(fourway_read)]
 fourway_interaction.to_csv(f'{outname}_fourway_read.info.bed', sep="\t", index=False)
@@ -101,8 +84,8 @@ multiComb.to_csv(f'{outname}_multiCombination.txt', sep='\t', index=False)
 twowayComb = twoway_interaction.groupby(['readid']).agg({'probeName':','.join}).reset_index()
 twowayComb.to_csv(f'{outname}_twowayCombination.txt', sep='\t', index=False)
 
-#threewayComb = twoway_interaction.groupby(['readid']).agg({'probeName':','.join}).reset_index()
-#threewayComb.to_csv(f'{outname}_threewayCombination.txt', sep='\t', index=False)
+threewayComb = twoway_interaction.groupby(['readid']).agg({'probeName':','.join}).reset_index()
+threewayComb.to_csv(f'{outname}_threewayCombination.txt', sep='\t', index=False)
 
 fourwayComb = fourway_interaction.groupby(['readid']).agg({'probeName':','.join}).reset_index()
 fourwayComb.to_csv(f'{outname}_fourwayCombination.txt', sep='\t', index=False)
