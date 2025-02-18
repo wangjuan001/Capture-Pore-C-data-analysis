@@ -18,6 +18,6 @@ zcat ${prefix}_${name}_chr2.pairs.gz |grep -v "#"| awk '{OFS="\t"; print $1,$2,$
 pairToBed -a ${outfolder}/${prefix}_${name}_chr2.simple.pairs.bedpe -b ${probeBed} -type both > ${outfolder}/${prefix}_${name}_chr2_probe_overlap_bothfrag.txt 
 
 ## filter reads with fragments overlap with different probe regions
-python multiway_v4.py ${outfolder}/${prefix}_${name}_chr2_probe_overlap_bothfrag.txt ${outfolder}/${prefix}_${name}_chr2_probe_overlap_bothfrag ${outfolder}/${prefix}
+python multiway.py ${outfolder}/${prefix}_${name}_chr2_probe_overlap_bothfrag.txt ${outfolder}/${prefix}_${name}_chr2_probe_overlap_bothfrag ${outfolder}/${prefix}
 
 ###usage: sh multiway_interaction_extractor.sh Run15_Hudep2_E1KO34_NlaIII_pro_CTCF/pairs/*pairs.gz Run15 run3_6_peaks2.bed 20240417_result 
